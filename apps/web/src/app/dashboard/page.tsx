@@ -3,14 +3,19 @@
 import { useEffect } from "react";
 
 export default function Dashboard() {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
 
-    useEffect(() => {
-        fetch("http://localhost:3001")
-          .then(res => res.text())
-          .then(data => console.log("API says:", data));
-      }, []);
+  useEffect(() => {
+    if (!baseUrl) {
+      console.error("API base URL is missing!");
+      return;
+    }
 
-  return (
-   <h1>Dashboard</h1>
-  );
+    fetch(baseUrl)
+      .then((res) => res.text())
+      .then((data) => console.log("API says:", data))
+      .catch((err) => console.error("Fetch failed:", err));
+  }, [baseUrl]);
+
+  return <h1>Dashboard</h1>;
 }

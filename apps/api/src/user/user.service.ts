@@ -24,8 +24,8 @@ export class UserService {
 
     const { password: _, ...userWithoutPassword } = user;
     const token = this.jwtService.sign({ sub: user.id, email: user.email });
-
-    return { userWithoutPassword, accessToken: token };
+    
+    return { user:userWithoutPassword, accessToken: token };
 }
 
   // Register User Service Function
@@ -76,7 +76,7 @@ export class UserService {
     const { password: _, ...userWithoutPassword } = user;
     const token = this.jwtService.sign({ sub: user.id, email: user.email });
 
-    return { userWithoutPassword, accessToken: token };
+    return { user: userWithoutPassword, accessToken: token };
   }
 
   // Get All Referrals Service Function

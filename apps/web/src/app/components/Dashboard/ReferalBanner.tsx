@@ -1,10 +1,20 @@
 "use client";
 
+import { useEffect } from "react";
 import { useState } from "react";
 
 export default function ReferalBanner() {
   const [copied, setCopied] = useState(false);
-  const referralLink = "https://trendies.ma/ref/hatim123";
+
+  const [referralLink, setReferralLink] = useState("");
+
+  useEffect(() => {
+    if (localStorage.getItem("referralCode")) {
+      setReferralLink(process.env.NEXT_PUBLIC_API_URL + "/?code=" + localStorage.getItem("referralCode"));
+    }
+
+    console.log(referralLink);
+  }, []);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(referralLink);
@@ -13,7 +23,7 @@ export default function ReferalBanner() {
   };
 
   return (
-    <div className="bg-black text-white rounded-2xl p-6 md:p-10 max-w-2xl mx-auto text-center shadow-xl mt-10">
+    <div className="bg-black text-white rounded-2xl p-6 md:p-10 max-w-2xl mx-auto text-center shadow-xl ">
     <h2 className="text-2xl md:text-3xl font-semibold mb-4">
       Refer a Friend & Earn Rewards 🎁
     </h2>

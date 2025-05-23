@@ -1,30 +1,54 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ReferalBanner from "@/app/components/Dashboard/ReferalBanner";
+import { getAllReferrals } from "../../../lib/auth";
+import ReferalList from "../components/Dashboard/ReferalList";
+
+type Referral = {
+  id: string;
+  name: string;
+  email: string;
+  // Add any other fields returned by your API
+};
 
 export default function Dashboard() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
+  const [referrals, setReferrals] = useState<Referral[]>([]);
+  const [userName, setUserName] = useState<string>("");
 
   useEffect(() => {
+    const userName = localStorage.getItem("userName");
+    setUserName(userName || "");
     if (!baseUrl) {
       console.error("API base URL is missing!");
       return;
     }
 
-    fetch(baseUrl)
-      .then((res) => res.text())
-      .then((data) => console.log("API says:", data))
-      .catch((err) => console.error("Fetch failed:", err));
+    const fetchReferrals = async () => {
+      try {
+        const referralCode = localStorage.getItem("referralCode");
+        if (!referralCode) {
+          console.error("Referral code not found!");
+          return;
+        }
+        const response = await getAllReferrals(referralCode);
+        setReferrals(response);
+        console.log(response);
+      } catch (err: any) {
+        console.error(err.message || "Unknown error");
+      }
+    };
+
+    fetchReferrals();
   }, [baseUrl]);
 
-
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-white text-black px-4 py-12">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-white text-black px-4 py-12 max-w-4xl mx-auto">
       {/* Top Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">
-          WELCOME BACK, HATIM SHABBIR
+      <div className="text-center ">
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 mt-20 uppercase">
+          WELCOME BACK, {userName}
         </h1>
         <p className="text-lg md:text-2xl font-medium text-gray-500">
           Your next favorite piece is waiting for you.
@@ -34,8 +58,11 @@ export default function Dashboard() {
       {/* Divider */}
       <hr className="my-8 border-t border-gray-300 w-full" />
 
-      {/* Referral Section */}
+      {/* Referral Banner */}
       <ReferalBanner />
+
+      {/* Referral List */}
+      <ReferalList referrals={referrals} />
     </div>
   );
 }

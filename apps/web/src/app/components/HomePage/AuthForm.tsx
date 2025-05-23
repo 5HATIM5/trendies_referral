@@ -52,8 +52,8 @@ export default function AuthForm({ mode }: Props) {
 
       setLoading(false);
       router.push("/dashboard");
-    } catch (err: any) {
-      console.error("Auth error:", err.response?.data || err.message);
+    } catch (err) {
+      console.error("Auth error:", err);
     }
   };
 

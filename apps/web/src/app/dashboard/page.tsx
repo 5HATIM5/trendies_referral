@@ -6,15 +6,14 @@ import { getAllReferrals } from "../../../lib/auth";
 import ReferalList from "../components/Dashboard/ReferalList";
 
 type Referral = {
-  id: string;
   name: string;
   email: string;
-  // Add any other fields returned by your API
+  createdAt: Date;
 };
 
 export default function Dashboard() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
-  const [referrals, setReferrals] = useState<Referral[]>([]);
+  const [referralList, setReferralList] = useState<Referral[]>([]);
   const [userName, setUserName] = useState<string>("");
 
   useEffect(() => {
@@ -33,10 +32,10 @@ export default function Dashboard() {
           return;
         }
         const response = await getAllReferrals(referralCode);
-        setReferrals(response);
+        setReferralList(response);
         console.log(response);
-      } catch (err: any) {
-        console.error(err.message || "Unknown error");
+      } catch (err) {
+        console.error(err);
       }
     };
 
@@ -62,7 +61,7 @@ export default function Dashboard() {
       <ReferalBanner />
 
       {/* Referral List */}
-      <ReferalList referrals={referrals} />
+      <ReferalList referrals={referralList} />
     </div>
   );
 }

@@ -85,6 +85,11 @@ export class UserService {
       where: {
         referredBy: referralCode,
       },
+      select: {
+        name: true,
+        email: true,
+        createdAt: true,
+      },
     });
   }
 }

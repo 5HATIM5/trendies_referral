@@ -5,7 +5,6 @@ import { useState } from "react";
 
 export default function ReferalBanner() {
   const [copied, setCopied] = useState(false);
-
   const [referralLink, setReferralLink] = useState("");
 
   useEffect(() => {
@@ -14,7 +13,7 @@ export default function ReferalBanner() {
     }
 
     console.log(referralLink);
-  }, []);
+  }, [referralLink]);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(referralLink);

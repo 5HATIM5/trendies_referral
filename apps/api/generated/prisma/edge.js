@@ -146,10 +146,6 @@ const config = {
       },
       {
         "fromEnvVar": null,
-        "value": "windows"
-      },
-      {
-        "fromEnvVar": null,
         "value": "debian-openssl-3.0.x"
       }
     ],
@@ -177,8 +173,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated/prisma\"\n  binaryTargets = [\"native\", \"windows\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id           String   @id @default(uuid())\n  email        String   @unique\n  name         String?\n  password     String\n  referralCode String   @unique\n  referredBy   String?\n  createdAt    DateTime @default(now())\n}\n",
-  "inlineSchemaHash": "a15dba7199ad5b433b0df35891930133a2590729785c8a1626958795f5477c1c",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated/prisma\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id           String   @id @default(uuid())\n  email        String   @unique\n  name         String?\n  password     String\n  referralCode String   @unique\n  referredBy   String?\n  createdAt    DateTime @default(now())\n}\n",
+  "inlineSchemaHash": "129acd6951b85f10f64bda3b3f56dd56e5d7857553171814f59196d0387445ce",
   "copyEngine": true
 }
 config.dirname = '/'

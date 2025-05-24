@@ -20,15 +20,15 @@ export default function AuthForm({ mode }: Props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const refCode = searchParams.get("referralCode");
-    if (refCode) Cookies.set("referralCode", refCode, { expires: 7 });
+    const refCode = searchParams.get("code");
+    if (refCode) Cookies.set("code", refCode, { expires: 7 });
   }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const ref = Cookies.get("referralCode");
+      const ref = Cookies.get("code");
 
       let response;
       if (mode === "signup") {

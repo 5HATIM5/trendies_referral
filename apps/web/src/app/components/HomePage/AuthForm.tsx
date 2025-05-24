@@ -56,6 +56,7 @@ export default function AuthForm({ mode }: Props) {
 
     } catch (err) {
       toast.error("Error Logging in");
+      console.error(err);
       setLoading(false);
     }
   };

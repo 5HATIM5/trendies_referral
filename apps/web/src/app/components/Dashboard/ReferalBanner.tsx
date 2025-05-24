@@ -9,7 +9,7 @@ export default function ReferalBanner() {
 
   useEffect(() => {
     if (localStorage.getItem("referralCode")) {
-      setReferralLink(process.env.NEXT_PUBLIC_API_URL + "/user/referrals/?code=" + localStorage.getItem("referralCode"));
+      setReferralLink(process.env.NEXT_URL + "/?code=" + localStorage.getItem("referralCode"));
     }
 
     console.log(referralLink);

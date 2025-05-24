@@ -14,6 +14,7 @@ export default function Navbar() {
     try {
       await logout();
       localStorage.removeItem('referralCode');
+      localStorage.removeItem('userName');
       router.push('/');              
     } catch (error) {
       console.error('Logout failed:', error);

@@ -32,7 +32,7 @@ type ReferralListProps = {
               >
                 <p className="font-medium text-lg">{name}</p>
                 <p className="text-gray-500 text-sm">{email}</p>
-                <p className="text-gray-500 text-sm">{createdAt.toLocaleDateString()}</p>
+                <p className="text-gray-500 text-sm">{createdAt.toLocaleString()}</p>
               </li>
             ))}
           </ul>

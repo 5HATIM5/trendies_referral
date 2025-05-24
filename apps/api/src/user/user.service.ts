@@ -11,7 +11,7 @@ export class UserService {
   // Login User Service Function
   async loginUser(email: string, password: string) {
     const user = await this.prisma.user.findUnique({ where: { email } });
-    console.log(user);
+
     if (!user) {
       throw new Error('Invalid credentials');
     }
@@ -24,7 +24,7 @@ export class UserService {
 
     const { password: _, ...userWithoutPassword } = user;
     const token = this.jwtService.sign({ sub: user.id, email: user.email });
-    
+
     return { user:userWithoutPassword, accessToken: token };
 }
 

@@ -9,7 +9,7 @@ export default async function DashboardLayout({
 }) {
 
   const token = (await cookies()).get('accessToken')?.value;
-
+  
   if (!token) {
     redirect('/');
   }

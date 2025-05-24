@@ -26,6 +26,8 @@ export class UserController {
       password,
     );
 
+    console.log(user, accessToken);
+
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -33,6 +35,7 @@ export class UserController {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
+    console.log(res.cookie);
     return res.status(HttpStatus.OK).json({ user });
   }
 

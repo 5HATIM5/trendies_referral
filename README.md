@@ -13,6 +13,8 @@ The referral system tracks user signups using a `?ref=ID` query parameter in the
 Access the live deployment here:  
 [https://trendies-referral-web.vercel.app](https://trendies-referral-web.vercel.app/)
 
+Note: For the best experience when testing the referral flow, I recommend using an incognito/private browser window to avoid cookie/session conflicts during sign-up.
+
 ---
 
 ## 🔧 Tech Stack

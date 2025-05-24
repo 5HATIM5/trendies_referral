@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ReferalBanner from "@/app/components/Dashboard/ReferalBanner";
 import { getAllReferrals } from "../../../lib/auth";
 import ReferalList from "../components/Dashboard/ReferalList";
+import { toast } from "react-hot-toast";
 
 type Referral = {
   name: string;
@@ -20,7 +21,7 @@ export default function Dashboard() {
     const userName = localStorage.getItem("userName");
     setUserName(userName || "");
     if (!baseUrl) {
-      console.error("API base URL is missing!");
+      toast.error("API base URL is missing!");
       return;
     }
 
@@ -28,14 +29,13 @@ export default function Dashboard() {
       try {
         const referralCode = localStorage.getItem("referralCode");
         if (!referralCode) {
-          console.error("Referral code not found!");
+          toast.error("Referral code not found!");
           return;
         }
         const response = await getAllReferrals(referralCode);
         setReferralList(response);
-        console.log(response);
       } catch (err) {
-        console.error(err);
+        toast.error(err as string);
       }
     };
 

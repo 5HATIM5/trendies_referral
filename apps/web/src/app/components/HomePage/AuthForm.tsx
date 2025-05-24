@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { login, signup } from "../../../../lib/auth";
 import Cookies from "js-cookie";
 import Loader from "../Global/Loader";
+import toast from "react-hot-toast";
 
 interface Props {
   mode: "signup" | "login";
@@ -38,10 +39,10 @@ export default function AuthForm({ mode }: Props) {
           password,
           ref: ref || undefined,
         });
-        console.log("Signup success:", response);
+        toast.success("Signup successful");
       } else {
         response = await login({ email, password });
-        console.log("Login success:", response);
+        toast.success("Login successful");
       }
 
       if (response?.user?.referralCode) {
@@ -50,10 +51,12 @@ export default function AuthForm({ mode }: Props) {
 
       }
 
-      setLoading(false);
       router.push("/dashboard");
+      setLoading(false);
+
     } catch (err) {
-      console.error("Auth error:", err);
+      toast.error("Error Logging in");
+      setLoading(false);
     }
   };
 

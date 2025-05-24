@@ -6,6 +6,7 @@ import { GoSignOut } from "react-icons/go";
 import { FaRegHeart, FaRegBell, FaRegComment } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { logout } from "../../../../lib/auth";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function Navbar() {
       localStorage.removeItem('userName');
       router.push('/');              
     } catch (error) {
-      console.error('Logout failed:', error);
+      toast.error(error as string);
     }
   };
 
